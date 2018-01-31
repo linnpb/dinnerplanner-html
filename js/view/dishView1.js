@@ -12,9 +12,9 @@
  * @param {jQuery object} container - references the HTML parent element that contains the view.
  * @param {Object} model - the reference to the Dinner Model
  */ 
-var detailView = function (container, model) {
+var dishView = function (container, model) {
   
-  var dishesPrint = container.find("#detailView");
+  var dishesPrint = container.find("#dishView");
 
 
   for (var i=0; i<model.dishes.length;i++){
