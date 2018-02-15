@@ -1,34 +1,84 @@
-//DinnerModel Object constructor
 var DinnerModel = function() {
 
-	//TODO Lab 1 implement the data structure that will hold number of guest
-	// and selected dishes for the dinner menu
+	var numOfGuests = 1;
+	var menu = [];
+	var fullMenu = [];
+	var observers = [];
+	var Id = 1;
+	var filter;
 
-	//Datastructure
-	this.numOfGuests = 1;
-	this.fullMenu = [];
+	this.setId = function(id) {
+		Id = id;
+		notifyObservers();
+	}
 
+	this.getId = function() {
+		return Id;
+
+	}
+
+	this.setFilter = function(value) {
+		filter = value;
+		notifyObservers();
+	}
+
+	this.getFilter = function() {
+		return filter;
+	}
+
+	this.getFilterValue = function(filter){
+	var value = [];
+	if (filter == "all"){
+		value.push("starter");
+		value.push("main dish");
+		value.push("dessert");
+	} else {
+		value.push(filter);
+	}
+	return value;
+	}
+
+
+	this.addObserver = function(observer) { 
+		observers.push(observer); 
+	}
+
+	var notifyObservers = function(args) { 
+		for (var i = 0; i < observers.length ; i++) {
+			console.log(observers[i]);
+			observers[i].update();
+		}
+    }
+
+    this.removeObserver = function(observer){
+    	var index = this.observers.indexOf(observer)
+    	if (~index) {
+    		this.observers.splice(index,1)
+    	}
+    }
+   
 	this.setNumberOfGuests = function(num) {
-		this.numOfGuests = num;
+		numOfGuests = num;
+		notifyObservers();
 	}
 
 	this.getNumberOfGuests = function() {
-		return this.numOfGuests;
+		return numOfGuests;
 	}
+
 
 	//Returns the dish that is on the menu for selected type
 	this.getSelectedDish = function(type) {
-		return fullMenu[type];
-	};
-
+		for(i = 0; i < menu.length; i++) {
+			if(menu[i].type == type){
+				return menu[i]
+			}
+		}
+	}
 
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() {
-		var menu = [];
-		for(i in fullMenu) {
-			menu.push(this.getDish(menu[i]));
-		}
-		return this.menu;
+		return menu;
 	}
 
 	//Returns all ingredients for all the dishes on the menu.
@@ -41,32 +91,20 @@ var DinnerModel = function() {
 		return allIngredients;
 	}
 
-
-
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
-	this.getTotalMenuPrice = function() {
-		var menuPrice = 0;
-		var guestPrice = 0;
-		var allIngredients = this.getAllIngredients();
-		for (i in allIngredients) {
-			guestPrice += allIngredients[i].price;
-		}
-		menuPrice = guestPrice * this.getNumberOfGuests();
-		return menuPrice;
-	}
-
-	// Price for dish
-	this.getTotalDishPrice = function(id){
-		var dishTotalPrice = 0;
+	this.getTotalMenuPrice = function(id) {
+		var totPrice = 0;
 		var dish = this.getDish(id);
-		var allDishIngredients = dish.ingredients;
-		for(var key in allDishIngredients){
-			dishTotalPrice += allDishIngredients[key].price;
+		var allIngredients = dish.ingredients;
+		for(i in allIngredients){
+			totPrice += allIngredients[i].price;
 		}
-		return dishTotalPrice;
+		totPrice = totPrice * this.getNumberOfGuests();
 
-
+		return totPrice;
+		notifyObservers();
 	}
+
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
@@ -76,6 +114,7 @@ var DinnerModel = function() {
 				this.fullMenu.push(this.dishes[i]);
 			}
 	}
+	notifyObservers();
 	}
 
 	//Removes dish from menu
@@ -85,6 +124,7 @@ var DinnerModel = function() {
 				fullMenu.splice(i, 1);
 			}
 		}
+		notifyObservers();
 	}
 
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
