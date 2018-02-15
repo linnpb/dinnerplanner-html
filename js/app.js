@@ -1,10 +1,28 @@
 $(function() {
-	//We instantiate our model
+
 	var model = new DinnerModel();
-	model.getNumberOfGuests();
-	
-	// And create the instance of ExampleView
-	var availableDishes = new dishView($("#dishSearchView"), model);
+
+	$("#indexView").show();
+	$("#header").show();
+	$("#sidebarView").hide();
+	$("#dishSearchView").hide();
+	$("#dishOverView").hide();
+	$("#dinnerOverview").hide();
+
+	var indexView = new IndexView($("#indexView"), model);
+	var sidebarView = new SidebarView($("#sidebarView"), model);
+	var dishView = new DishView($("#dishSearchView"), model);
+	var detailView = new DetailView($("#dishOverView"), model);
+	var overView = new OverView($("#dinnerOverview"), model);
+
+	var indexController = new IndexController(indexView, model);
+	var sidebarController = new SidebarViewController(sidebarView, model);
+	var dishviewController = new DishController(dishView, model);
+	var detailController = new DetailController(detailView, model);
+	var overviewController = new OverViewController(overView, model);
+
+
+
 
 	/**
 	 * IMPORTANT: app.js is the only place where you are allowed to
