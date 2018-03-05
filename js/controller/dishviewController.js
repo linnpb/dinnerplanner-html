@@ -1,20 +1,24 @@
-var DishController = function (view, model) {
+var DishController = function (view, model, app) {
 
-	view.searchbtn.click(function(){
-		var filter = document.getElementById("filter");
-		var value = filter.options[filter.selectedIndex].value;
-		model.setFilter(value);
+	view.searchButton.click(function(){
+		var value = view.typeValue.val();
+		console.log("Value is:" ,value)
+		var search = view.search.val();
+		model.setFilter(search);
+		model.setType(value);
+		view.update("searchResults");
+
 	});
 
-	view.dishesC.on('click',".dish", function(){
-			model.setId($(this).attr('id'));
-			$("#indexView").hide();
-			$("#header").show();
-			$("#sidebarView").show();
-			$("#dishSearchView").hide();
-			$("#dishOverView").show();
-			
-		});
-}
 
+	view.searchForm.on('click',".dish", function(){
+			var dishId = $(this).attr('id');
+			model.getDish(dishId, function(data) {
+				model.setCurrentDish(data);
+				app.detailPage();
+			})
+	
+			
+	});
+}
 

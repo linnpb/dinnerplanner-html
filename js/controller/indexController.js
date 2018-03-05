@@ -1,11 +1,7 @@
-var IndexController = function (view, model) {
+var IndexController = function (view, model, app) {
 
-	view.homeButton.click(function(){
-		$("#indexView").hide();
-		$("#header").show();
-		$("#sidebarView").show();
-		$("#dishSearchView").show();
-		$("#dishView").show();
-		$("#dishOverView").hide();
+	view.homeButton.click(function() {
+		app.dishPage();
+	
 	});	
 };
