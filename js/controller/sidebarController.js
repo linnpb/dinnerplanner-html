@@ -1,21 +1,21 @@
-var SidebarViewController = function (view, model) {
+var SidebarViewController = function (view, model, app) {
 
  	view.plusButton.click(function() {
       model.setNumberOfGuests(model.getNumberOfGuests() + 1);
-      console.log(model.getNumberOfGuests());
-   	  });
+  });
 
   view.minusButton.click(function(){
-          model.setNumberOfGuests(model.getNumberOfGuests() - 1);
-          console.log(model.getNumberOfGuests());
-  	});
+      model.setNumberOfGuests(model.getNumberOfGuests() - 1);
+  });
 
-  	view.confirmDinner.click(function() {
-  		$("#indexView").hide();
-		  $("#header").show();
-		  $("#sidebarView").show();
-		  $("#dishSearchView").show();
-		  $("#dishView").show();
-		  $("#dishOverView").hide();
-  	});
+  view.confirmDinner.click(function() {
+      app.overViewPage();
+  });
+
+  view.dishPrice.on('click', '.remove-button', function() {
+      var dishId = $(this).attr("id")
+      model.removeDishFromMenu(dishId);
+  });
+
+
 }

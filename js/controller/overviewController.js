@@ -1,14 +1,13 @@
-var OverViewController = function (view, model) {
+var OverViewController = function (view, model, app) {
 
 	view.backButton.click(function() {
-		$("#indexView").hide();
-		$("#header").show();
-		$("#sidebarView").show();
-		$("#dishSearchView").show();
-		$("#dishOverView").hide();
-		$("#dinnerOverview").hide();
-	
+		app.dishPage();
+	});
+
+	view.printButton.click(function() {
+		app.printPage();
 	});
 
 
-}
+
+};
