@@ -1,146 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     	<title>Dinner planner</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <style type="text/css">
-
-	#header {
-		background-color: #e5e5e5;
-		float: center;
-		padding-top: 15px;
-		padding-bottom: 15px;
-		text-align: center;
-		font-family: "Comic Sans MS", "Comic Sans", cursive;
-		font-weight: bold;
-		font-size: 64px;
-		border-bottom: 4px solid #d3d3d3;
-	}
-
-	#container {
-		font-size: 15px;
-		padding-top: 100px;
-		padding-bottom: 50px;
-		text-align: center;
-		font-family: "Comic Sans MS", "Comic Sans", cursive;
-		float: center;
-		padding-left: 275px;
-		padding-right: 275px;
-
-	}
-
-	#sidebarView {
-		background-color: #fff;
-		float: left;
-		border: 2px solid black;
-		font-family: "Comic Sans MS", "Comic Sans", cursive;
-	}
-
-	.separator {
-	    background-color: #e5e5e5;
-	    border: 2px solid black;
-	    height: 30px;
-	}
-
-	.left {
-		float: left;
-	}
-
-	.right {
-		float: right;
-	}
-
-
-	#dishSearchView {
-		font-family: "Comic Sans MS", "Comic Sans", cursive;
-		border: 2px solid black;
-	}
-
-	#dishSearchView input[type=text] {
-	    float: left;
-	    border: 1px solid grey;
-	}
-
-
-	#totalCost {
-		color: red;
-		float: right;
-
-	}
-
-	#dishOverView {
-		background-color: #fff;
-		float: left;
-		border: 2px solid black;
-		font-family: "Comic Sans MS", "Comic Sans", cursive;
-	}
-
-
-	#totalCost {
-		color: red;
-		float: right;
-
-	}
-
-	.btnorange {
-		background-color: #FE9A2E;
-		font-weight: bold;
-	}
-
-	.ibox {
-		background-color: #FFCF75;
-		height: 30px;
-	}
-
-	#myd {
-		font-size: 20px;
-	}	
-
-
-	.btnprint {
-		background-color: #FE9A2E;
-		font-weight: bold;
-		float: center;
-
-	}
-
-	#mydinner {
-		font-family: "Comic Sans MS", "Comic Sans", cursive;
-		padding-top: 20px;
-		padding-bottom: 20px;
-		border-bottom: 2px solid #000000;
-
-	}
-
-	#myd {
-		font-size: 20px;
-	}
-
-	.sek {
-		color: red;
-	}
-
-	#pics {
-		padding-top: 10px;
-		padding-bottom: 10px;
-		border-bottom: 2px solid #000000;
-		font-family: "Comic Sans MS", "Comic Sans", cursive;
-
-	}
-
-	#print {
-		padding-top: 20px;
-		padding-bottom: 50px;
-	}
-
-
-	</style>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 
 <body>
@@ -150,166 +17,189 @@
 
 <!-- index -->
     <div id="indexView">
-	<div id="container" class="col-sm-12"> 
-		 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-		 <br>
-		 <br>
-		 <br>
-
-	<a class="btn btn-default" id="home-button" role="button">Create new dinner</a>
-
-	</div> 
+		<div id="indexcontainer" class="col-sm-12"> 
+		 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		 		<br>
+		 		<br>
+		 		<br>
+		 	<a class="btn btn-default" id="home-button" role="button">Create new dinner</a>
+		</div> 
 	</div>
 
 
 <!-- sidebar view -->
   	<div id="sidebarView" class="col-md-2">
   		<h4>My dinner</h4>
-			<div>
-				Number of guests: <span id="numOfGuests"></span>
-			</div>
 
-			<div>
-	          	<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
-				<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
-			</div>
-			
+		<div>
+			Number of guests: <span id="numOfGuests"></span>
+		</div>
+
+		<div>
+	        <button id="minusGuest" class="btn">
+	        	<span class="glyphicon glyphicon-minus"></span>
+	        </button>
+			<button id="plusGuest" class="btn">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
+		</div>
+
 			<br>
 
-			<div class="row space">
+		<div class="row space">
 			<div id="dishCost" class="separator">
-					<div class="left">Dish name</div>
-					<div class="right">Cost</div>
+				<div class="left">Dish name</div>
+				<div class="right">Cost</div>
 			</div>
-
 			<div id="dishPrice" class="left"> </div>
-
-			</div>
-				<br>
-
-  			<div id="totalCost">
-				<div class="col-md-12"> 
-					<span id="totalCost"></span>
-				</div>
-			</div>
+		</div>
 
 			<br>
-			<br>
 
-			<div class="col-md-12 com-md-push-2">
-			<a class="btn btn-default" id="confirmbtn" role="button">Confirm Dinner</a>
-			</div>
-
-			<br>
-			<br>
-
-  		</div>
-  		
-
-<!--dish search view -->
-		<div id="dishSearchView" class="col-md-10">
-					<div class="col-md-12">
-						<h5> FIND A DISH </h5>
-						<br>
-
-						<div class = "row">
-							<div class="col-md-3">
-								<input id="search" type="text" value="Enter key words">
-							</div>
-
-							<div class="col-md-3">
-								<select id="filter">
-									<option value="all" >All</option>
-									<option value="starter">Starter</option>
-									<option value="main dish">Main Course</option>
-									<option value="dessert">Dessert</option>
-								</select>
-							</div>
-
-							<div class="col-md-3">
-								<button id="searchbtn" class="btn btn-default">Search</button>
-							</div>
-						</div>
-						<br>
-						<br>
-					</div>
-					<span id="dish"></span>
-				</div>
-
-  	
-
-
-<!-- detail dish view -->
-		<div id="dishOverView" class="col-md-10">
-            <div class="col-md-12">
-
-            	<div class="col-md-6"> 
-                    <div class="row">
-                        <span id="dishTitle"></span>
-                    </div>
-                    <br>
-                    <div id="dishDetail"></div>
-                    <br>                
-                    <button id="backbtn" class="btn btn-default">Back to search</button>
-                </div>
-
-                <div class="col-md-6"> 
-                    <br>
-                    <div id="ingredientsDetail">
-                        <div class="row space">
-                            <div class="col-md-12">
-                                Ingredients for <span id="numOfGuests"></span> people :
-                            </div>
-                        </div>                         
-                        <div id="ingredients"> </div>
-                        <br>
-                        <div class="row space">
-                        	<div class="col-xs-8">
-                                <button id="addbtn" class="btn-btn-default">Add dish</button>
-                            </div>
-                            <div class="col-xs-2">
-                                Total 
-                            </div>
-                            <span id="totCost"></span>                            
-                        </div>
-                    </div>
-                </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Preparation</h3>
-                    <span id="preparation"></span>
-                </div>
-            </div>
-            </div>
-        </div> 
-
-
-<!-- dinner overview -->
-		<div id="dinnerOverview">
-			<div class="col-md-12" id="mydinner">
-				<div id="myd" class="col-md-9"> My Dinner: 
-					<span id="numOfGuests"> </span> people 
-				</div>
-				<div class="col-md-3">
-					<button id="backbtn" class="btn-btn-default">Go back and edit dinner</button>
-				</div>
-			</div>
-
-			<div class="col-md-12" id="pics">
-				<div id ="myDishes"></div>
-			</div>	
-			<div class="col-md-12">
-				  Total: <div id="totalCost"> </div> <div class="sek"> SEK </div>
-			</div>
-			
-			<div class="col-md-12" align="center" id="print">
-					<button id="printbtn" class="btn-btn-default">Print Full Recipe</button>
+		<div id="totalCost">
+			<div class="col-md-12"> 
+				<span id="totalCost"></span>
 			</div>
 		</div>
 
-		
+			<br>
+			<br>
+
+		<div class="col-md-12 com-md-push-2">
+			<a class="btn btn-default" id="confirmbtn" role="button">Confirm Dinner</a>
+		</div>
+
+			<br>
+			<br>
+  	</div>	
+
+<!--dish search view -->
+	<div id="dishSearchView" class="col-md-10">
+		<div class="col-md-12">
+			<h5> FIND A DISH </h5>
+				<br>
+			<div id="searchForm" class = "row">
+				<div class="col-md-3">
+					<input id="search" type="text" placeholder="Enter key words">
+				</div>
+				<div class="col-md-3">
+					<select id="filter">
+						<option value="main course">Main Course</option>
+						<option value="side dish" >Side Dish</option>
+						<option value="appetizer">Appetizer</option>
+						<option value="salad">Salad</option>
+						<option value="dessert">Dessert</option>
+						<option value="bread">Bread</option>
+						<option value="breakfast">Breakfast</option>
+						<option value="soup">Soup</option>
+						<option value="beverage">Beverage</option>
+						<option value="sauce">Sauce</option>
+						<option value="drink">Drink</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<button id="searchbtn" class="btn btn-default">Search</button>
+				</div>
+			</div>
+				<br>
+				<br>
+		</div>
+		<img src="https://www.aad.org/calendar/Images/loading.gif" id="loading" />
+			<span id="dish"></span>
+	</div>
+
+<!-- detail dish view -->
+	<div id="dishOverView" class="col-md-10">
+        <div class="col-md-12">
+        <div class="col-md-6"> 
+            <div class="row">
+                	<br>
+            	<span id="dishTitle"></span>
+            </div>
+                <br>
+            <div id="dishDetail"></div>
+                <br> 
+            <button id="backbtn" class="btn btn-default">Back to search</button>
+        </div>
+        <div class="col-md-6"> 
+                <br>
+            <div id="ingredientsDetail">
+                <div class="row space">
+                    <div class="col-md-12">
+                        Ingredients for <span id="numOfGuests"></span> people :
+                    </div>
+                </div>
+                    <br>                         
+                <table id="ingredients"> 
+                    <tr>
+						<th>Ingredients</th>
+						<th>Quantity</th>
+						<th>Unit</th>
+					</tr>
+					<tr>
+						<td id="ing"></td>
+						<td id="quant"></td>
+						<td id="unit"></td>
+					</tr>
+				</table>
+                    <br>
+                <div class="row space">
+                    <div class="col-xs-6">
+                        <button id="addbtn" class="btn-btn-default">Add dish</button>
+                    </div> 
+                    <div class="col-xs-3">
+                        <span id="cost"></span>
+                    </div>
+                    <div class="col-xs-3">
+                        SEK 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-md-12">
+                <h3>Preparation</h3>
+				<span id="preparation"></span>
+            </div>
+        </div>
+        </div>
+    </div> 
+
+
+<!-- dinner overview -->
+	<div id="dinnerOverview">
+		<div class="col-md-12" id="mydinner">
+			<div id="myd" class="col-md-9"> My Dinner: 
+				<span id="numOfGuests"> </span> people 
+			</div>
+			<div class="col-md-3">
+				<button id="backbutton" class="btn-btn-default">Go back and edit dinner</button>
+			</div>
+		</div>
+		<div class="col-md-12" id="pics">
+			<div id ="myDishes"></div>
+		</div>	
+			<div class="col-md-12" align="center" id="print">
+					<button id="printbtn" class="btn-btn-default">Print Full Recipe</button>
+		</div>
+	</div>
+
+<!-- dinner printoutview -->
+	<div id="printoutView">
+		<div class="col-md-12" id="mydinner">
+			<div id="myd" class="col-md-9"> My Dinner:
+				<span id="numOfGuests"></span> people 
+			</div>
+			<div class="col-md-3">
+				<button id="btnback" class="btn-btn-default">Go back and edit dinner</button>
+			</div>
+		</div>
+		<div class="col-md-12">
+				<br>
+			<div id="printout"> </div>
+        </div>
+	</div>		
+
 
 
 	<script src="https://code.jquery.com/jquery.js"></script>
@@ -317,20 +207,18 @@
 
 	<script src="js/app.js"></script>
 	<script src="js/model/dinnerModel.js"></script>
-
 	<script src="js/view/indexView.js"></script>
-	<script src="js/view/sidebarView.js"></script>
-	<script src="js/view/dishView.js"></script>
-	<script src="js/view/detailView.js"></script>
-	<script src="js/view/overView.js"></script>
-
 	<script src="js/controller/indexController.js"></script>
+	<script src="js/view/sidebarView.js"></script>
 	<script src="js/controller/sidebarController.js"></script>
+	<script src="js/view/dishView.js"></script>
 	<script src="js/controller/dishviewController.js"></script>
-	<script scr="js/controller/detailController.js"></script>
-	<script scr="js/controller/overviewController.js"></script>
-
-
+	<script src="js/view/detailView.js"></script>
+	<script src="js/controller/detailController.js"></script>
+	<script src="js/view/overView.js"></script>
+	<script src="js/controller/overviewController.js"></script>
+	<script src="js/view/printoutView.js"></script>
+	<script src="js/controller/printoutController.js"></script>
 
 
 </body>
