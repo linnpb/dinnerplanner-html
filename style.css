@@ -1,0 +1,145 @@
+	#header {
+		background-color: #e5e5e5;
+		float: center;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		text-align: center;
+		font-family: "Comic Sans MS", "Comic Sans", cursive;
+		font-weight: bold;
+		font-size: 64px;
+		border-bottom: 4px solid #d3d3d3;
+	}
+
+	#indexcontainer {
+		font-size: 15px;
+		padding-top: 100px;
+		padding-bottom: 50px;
+		text-align: center;
+		font-family: "Comic Sans MS", "Comic Sans", cursive;
+		float: center;
+		padding-left: 275px;
+		padding-right: 275px;
+	}
+
+	#sidebarView {
+		font-family: "Comic Sans MS", "Comic Sans", cursive;
+	}
+
+	.separator {
+	    background-color: #e5e5e5;
+	    border-top: 2px solid #d3d3d3;
+	    border-bottom: 2px solid #d3d3d3;
+	    height: 30px;
+	}
+
+	.left {
+		float: left;
+	}
+
+	.right {
+		float: right;
+	}
+
+
+	#dishSearchView {
+		font-family: "Comic Sans MS", "Comic Sans", cursive;
+		border-left: 4px solid #d3d3d3;
+	}
+
+	#search input[type=text] {
+	    float: left;
+	    border: 1px solid grey;
+	}
+
+	#totalCost {
+		float: right;
+	}
+
+	#dishOverView {
+		float: left;
+		border-left: 4px solid #d3d3d3;
+		font-family: "Comic Sans MS", "Comic Sans", cursive;
+	}
+
+
+
+	.ibox {
+		background-color: #FFCF75;
+		height: 30px;
+	}
+
+	#myd {
+		font-size: 20px;
+	}	
+
+
+	.btnprint {
+		background-color: #FE9A2E;
+		font-weight: bold;
+		float: center;
+
+	}
+
+	#mydinner {
+		font-family: "Comic Sans MS", "Comic Sans", cursive;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		border-bottom: 4px solid #d3d3d3;
+	}
+
+	#myd {
+		font-size: 20px;
+	}
+
+	#pics {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		border-bottom: 4px solid #d3d3d3;
+		font-family: "Comic Sans MS", "Comic Sans", cursive;
+	}
+
+	#print {
+		padding-top: 20px;
+		padding-bottom: 50px;
+		font-family: "Comic Sans MS", "Comic Sans", cursive;
+	}
+
+	#printoutView {
+		font-family: "Comic Sans MS", "Comic Sans", cursive;
+
+	}
+
+	.dish {
+		width: 180px;
+		height: 180px;
+		background-size: cover;
+	}
+
+	.dishname {
+		text-align: left;
+
+	}
+
+	#dishTitle {
+		font-size: 20px;
+		padding-top: 10px;
+	}
+
+	img {
+		width: 75%;
+		height: 75%;
+		background-size: cover;
+
+	}
+
+	img.imgdish {
+		width: 75%;
+		height: 75%;
+		background-size: cover;
+
+	}
+	img.img {
+		width: 100%;
+		height: 100%
+		background-size: cover;
+	}
