@@ -1,19 +1,11 @@
-var DetailController = function (view, model) {
-
+var DetailController = function (view, model, app) {
 	view.backButton.click(function() {
-		$("#indexView").hide();
-		$("#header").show();
-		$("#sidebarView").show();
-		$("#dishSearchView").hide();
-		$("#dishOverView").hide();
-		$("#dinnerOverview").show();
-	
+		app.dishPage();
 	});
 
+	view.addButton.click(function() {
+		var dish = model.getCurrentDish();
+		model.addDishToMenu(dish);
+	});
 
-    view.addButton.click(function() {
-    	model.addDishToMenu(model.getId());
-    });
-
-
-}
+};
