@@ -2,42 +2,48 @@ var DinnerModel = function() {
 
 	var numOfGuests = 1;
 	var menu = [];
-	var fullMenu = [];
 	var observers = [];
-	var Id = 1;
-	var filter;
+	var selectedId = 1;
+	var filter = "";
+	var type = 'main course';
+	var API_KEY = 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB';
+	var selectedDish;
+
+	this.setCurrentDish = function(dish) {
+		selectedDish = dish;
+		notifyObservers();
+	}
+
+	this.getCurrentDish = function() {
+		return selectedDish;
+	}
 
 	this.setId = function(id) {
-		Id = id;
+		selectedId = id;
 		notifyObservers();
 	}
 
 	this.getId = function() {
-		return Id;
-
+		return selectedId;
 	}
 
 	this.setFilter = function(value) {
 		filter = value;
-		notifyObservers();
+		//notifyObservers();
 	}
 
 	this.getFilter = function() {
 		return filter;
 	}
 
-	this.getFilterValue = function(filter){
-	var value = [];
-	if (filter == "all"){
-		value.push("starter");
-		value.push("main dish");
-		value.push("dessert");
-	} else {
-		value.push(filter);
-	}
-	return value;
+	this.setType = function(value) {
+		type = value;
+		//notifyObservers();
 	}
 
+	this.getType = function() {
+		return type;
+	}
 
 	this.addObserver = function(observer) { 
 		observers.push(observer); 
@@ -45,7 +51,6 @@ var DinnerModel = function() {
 
 	var notifyObservers = function(args) { 
 		for (var i = 0; i < observers.length ; i++) {
-			console.log(observers[i]);
 			observers[i].update();
 		}
     }
@@ -59,7 +64,7 @@ var DinnerModel = function() {
    
 	this.setNumberOfGuests = function(num) {
 		numOfGuests = num;
-		notifyObservers();
+		notifyObservers("numOfGuests");
 	}
 
 	this.getNumberOfGuests = function() {
@@ -68,13 +73,13 @@ var DinnerModel = function() {
 
 
 	//Returns the dish that is on the menu for selected type
-	this.getSelectedDish = function(type) {
+	/*this.getSelectedDish = function(type) {
 		for(i = 0; i < menu.length; i++) {
 			if(menu[i].type == type){
 				return menu[i]
 			}
 		}
-	}
+	}*/
 
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() {
@@ -82,17 +87,17 @@ var DinnerModel = function() {
 	}
 
 	//Returns all ingredients for all the dishes on the menu.
-	this.getAllIngredients = function() {
+	/*this.getAllIngredients = function() {
 		var fullMenu = this.getFullMenu();
 		var allIngredients = [];
 		for (i in fullMenu){
 			allIngredients = allIngredients.concat(fullMenu[i].ingredients);
 		}
 		return allIngredients;
-	}
+	}*/
 
-	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
-	this.getTotalMenuPrice = function(id) {
+	//Returns the total dish price
+	/*this.getTotalDishPrice = function(id) {
 		var totPrice = 0;
 		var dish = this.getDish(id);
 		var allIngredients = dish.ingredients;
@@ -102,61 +107,98 @@ var DinnerModel = function() {
 		totPrice = totPrice * this.getNumberOfGuests();
 
 		return totPrice;
-		notifyObservers();
+	}*/
+
+	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
+	this.getTotalMenuPrice = function() {
+		var totCost = 0;
+		var num = this.getNumberOfGuests();
+		
+		for (i = 0; i < menu.length; i++) {
+			totCost += menu[i].pricePerServing*num
+		}
+
+		return Math.round(totCost);
 	}
 
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
-	this.addDishToMenu = function(id) {
-		for(var i = 0; i < this.dishes.length; i++){
-			if(this.dishes[i].id === id){
-				this.fullMenu.push(this.dishes[i]);
+	this.addDishToMenu = function(dish) {	
+
+		if (!menu.some(i => i.id == dish.id)){
+			menu.push(dish)
+		}
+		notifyObservers();
+	
+	}
+
+	/*this.addDishToMenu = function(id) {
+		if(numOfGuests != 0) {
+			var dish = this.getDish(id);
+			for(var i = 0; 1 < this.getFullMenu().length; i++) {
+				if(dish.type === this.getFullMenu()[i].type) {
+					this.removeDishFromMenu(this.getFullMenu()[i].id);
+				}
 			}
-	}
-	notifyObservers();
-	}
+			menu.push(dish);
+			notifyObservers();	
+		}
+	}*/
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
-		for(var i = 0; i < fullMenu.length; i++){
-			if(fullMenu[i].id === id){
-				fullMenu.splice(i, 1);
+		for(var i = 0; i < this.getFullMenu().length; i++) {
+			if(this.getFullMenu()[i].id !== id) {
+				menu.push(this.getFullMenu()[i]);
 			}
 		}
-		notifyObservers();
 	}
+
+
 
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the dishes will be returned
-	this.getAllDishes = function (type,filter) {
-	  return this.dishes.filter(function(dish) {
-		var found = true;
-		if(filter){
-			found = false;
-			dish.ingredients.forEach(function(ingredient) {
-				if(ingredient.name.indexOf(filter)!=-1) {
-					found = true;
-				}
-			});
-			if(dish.name.indexOf(filter) != -1)
-			{
-				found = true;
-			}
-		}
-	  	return dish.type == type && found;
-	  });
-	}
+	//'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=20' + (type != null ? '&type="' + type + '"' : '') + (filter != null ? '&query="' + filter + '"' : '');
+	this.getAllDishes = function (type,filter, callback, errorCallback) {
+			$.ajax( {
+				/*type: "get",
+				data: {
+					type: type,
+					query: filter,
+					number: 20 
+				},*/
+	  			url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?type=' + type + '&query=' + filter,
+	   			headers: {
+	     			'X-Mashape-Key': API_KEY
+	   			},
+	   			success: function(data) {
+	     			callback(data)
+	   			},
+	   			error: function(error) {
+	    			errorCallback(error)
+	   			}
+	 		})	
+		}	 
 
 	//function that returns a dish of specific ID
-	this.getDish = function (id) {
-	  for(var i in this.dishes){
-			if(this.dishes[i].id == id) {
-				return this.dishes[i];
-			}
-		}
+	this.getDish = function (id, callback, errorCallback) {
+		$.ajax( {
+  			url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+Number(id)+'/information',
+   			headers: {
+     			'X-Mashape-Key': API_KEY
+   			},
+   			success: function(data) {
+     			callback(data)
+   			},
+   			error: function(error) {
+    			errorCallback(error)
+   			},
+ 		})	
 	}
+
+
 
 
 	// the dishes variable contains an array of all the
@@ -167,7 +209,7 @@ var DinnerModel = function() {
 	// defining the unit i.e. "g", "slices", "ml". Unit
 	// can sometimes be empty like in the example of eggs where
 	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
-	this.dishes = [{
+	/*this.dishes = [{
 		'id':1,
 		'name':'French toast',
 		'type':'starter',
@@ -411,4 +453,6 @@ var DinnerModel = function() {
 		}
 	];
 
+
+*/
 }
